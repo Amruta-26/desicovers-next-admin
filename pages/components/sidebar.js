@@ -20,194 +20,131 @@ import FolderIcon from "@mui/icons-material/Folder";
 import { indigo } from "@mui/material/colors";
 import TagFacesIcon from "@mui/icons-material/TagFaces";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import Link from "next/link";
 
 const drawerWidth = 300;
 
 export default function Sidebar() {
-  const [open, setOpen] = React.useState(true);
+    const productItems = [
+        { name: "Add Product", link: "/add-product" },
+        { name: "Show Product", link: "/demo" },
+        { name: "Add Pincode", link: "/demo" },
+        { name: "Tshirt Size", link: "/demo" },
+        { name: "Bulk TshirtSize", link: "/demo" },
+    ];
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
+    const paymentItems = [
+        { name: "Payment Recieve", link: "/demo" },
+        { name: "Place Order", link: "/demo" },
+        { name: "Cancel Order", link: "/demo" },
+        { name: "Assign Money for Cancel Order", link: "/demo" },
+        { name: "Customer Account", link: "/demo" },
+        { name: "Wallet", link: "/demo" },
+    ];
 
-  return (
-    <Drawer
-      sx={{
-        width: '18%',
-        height: "100%",
-        flexShrink: 0,
-        "& .MuiDrawer-paper": {
-          width: '18%',
-          boxSizing: "border-box",
-          bgcolor: indigo[400],
-          color: "#fff",
-        },
-      }}
-      variant="permanent"
-      anchor="left"
-    >
-      <List>
-        <div className="logo-heading">
-          <div className="logo">
-            <TagFacesIcon sx={{ fontSize: 50 }} />
-            &emsp;&emsp;
-          </div>
-          <div className="heading">
-            DESICOVER
-            <br />
-            ADMIN<sup>2</sup>
-          </div>
-        </div>
+    const mobileItems = [
+        { name: "Add Flip", link: "/demo" },
+        { name: "Show Flip", link: "/demo" },
+        { name: "Carousel", link: "/demo" },
+        { name: "Home Page Image", link: "/demo" },
+        { name: "Home Page Words", link: "/demo" },
+        { name: "Home Page Image", link: "/demo" },
+        { name: "Show Recent Arrival", link: "/demo" },
+    ];
 
-        <Divider sx={{bgcolor: '#adadad'}}/>
-        <ListItemButton>
-          <ListItemIcon>
-            <DashboardIcon sx={{ color: "#fff"}} />
-          </ListItemIcon>
-          <ListItemText sx={{py:1}} primary="Dashboard" />
-        </ListItemButton>
-        <Divider sx={{bgcolor: '#adadad'}}/>
-        <div className="fadeword">INTERFACE</div>
-        <List>
-          <ListItemButton onClick={handleClick}>
-            <ListItemIcon>
-              <SettingsIcon sx={{ color: "#fff" }} />
-            </ListItemIcon>
-            <ListItemText primary="Product" />
-            {open ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
+    const mobileCoversItems = [
+        { name: "Enter Mobile Cover", link: "/demo" },
+        { name: "Update Bulk Price", link: "/demo" },
+        { name: "Update Bulk description", link: "/demo" },
+        { name: "Review", link: "/demo" },
+        { name: "Admin Heading", link: "/demo" },
+    ];
 
-          <div className="dropdown">
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <div className="drop-fade">CUSTOM COMPONENTS:</div>
-              <List component="div" disablePadding>
-                {[
-                  "Add Product",
-                  "Show Product",
-                  "Add Pincode",
-                  "Tshirt Size",
-                  "Bulk Tshirt Size",
-                ].map((text, index) => (
-                  <ListItem sx={{ pl: 4 }} button key={text}>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                ))}
-              </List>
-            </Collapse>
-          </div>
+    const dashboardContent = [
+        productItems,
+        paymentItems,
+        mobileItems,
+        mobileCoversItems,
+    ];
 
-          <ListItemButton onClick={handleClick}>
-            <ListItemIcon>
-              <BuildIcon sx={{ color: "#fff" }} />
-            </ListItemIcon>
-            <ListItemText primary="Customer" />
-            {open ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
+    return (
+        <Drawer
+            sx={{
+                width: "18%",
+                height: "100%",
+                flexShrink: 0,
+                "& .MuiDrawer-paper": {
+                    width: "18%",
+                    boxSizing: "border-box",
+                    bgcolor: indigo[400],
+                    color: "#fff",
+                },
+            }}
+            variant="permanent"
+            anchor="left"
+        >
+            <List>
+                <div className="logo-heading">
+                    <div className="logo">
+                        <TagFacesIcon sx={{ fontSize: 50 }} />
+                        &emsp;&emsp;
+                    </div>
+                    <div className="heading">
+                        DESICOVER
+                        <br />
+                        ADMIN<sup>2</sup>
+                    </div>
+                </div>
 
-
-          <div className="dropdown">
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <div className="drop-fade">CUSTOMER SERVICES:</div>
-              <List component="div" disablePadding>
-                {[
-                  "Payment Recieve",
-                  "Place Order",
-                  "Cancel Order",
-                  "Assign Money for Cancel Order",
-                  "Customer Account",
-                  "Wallet",
-                ].map((text, index) => (
-                  <ListItem sx={{ pl: 4 }} button key={text}>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                ))}
-              </List>
-            </Collapse>
-          </div>
-        </List>
-
-        <Divider sx={{bgcolor: '#adadad'}}/>
-        <div className="fadeword">ADDONS</div>
-        <List>
-          <ListItemButton onClick={handleClick}>
-            <ListItemIcon>
-              <FolderIcon sx={{ color: "#fff" }} />
-            </ListItemIcon>
-            <ListItemText primary="Offer" />
-            {open ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-
-          <div className="dropdown">
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <div className="drop-fade">COUPON:</div>
-              <List component="div" disablePadding>
-                {["Add Coupon", "Show Coupons"].map((text, index) => (
-                  <ListItem sx={{ pl: 4 }} button key={text}>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                ))}
-              </List>
-            </Collapse>
-          </div>
-
-          <ListItemButton onClick={handleClick}>
-            <ListItemIcon>
-              <FolderIcon sx={{ color: "#fff" }} />
-            </ListItemIcon>
-            <ListItemText primary="Home Page" />
-            {open ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-
-          <div className="dropdown">
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <div className="drop-fade">BASIC SERVICES:</div>
-              <List component="div" disablePadding>
-                {[
-                  "Add Flip",
-                  "Show Flip",
-                  "Carousel",
-                  "Home Page Image",
-                  "Home Page Words",
-                  "Home Page Image",
-                  "Show Recent Arrival",
-                ].map((text, index) => (
-                  <ListItem sx={{ pl: 4 }} button key={text}>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                ))}
-              </List>
-            </Collapse>
-          </div>
-
-          <ListItemButton onClick={handleClick}>
-            <ListItemIcon>
-              <FolderIcon sx={{ color: "#fff" }} />
-            </ListItemIcon>
-            <ListItemText primary="Mobile Page" />
-            {open ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-
-          <div className="dropdown">
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <div className="drop-fade">MOBILE SERVICES:</div>
-              <List component="div" disablePadding>
-                {[
-                  "Enter Mobile Cover",
-                  "Update Bulk Price",
-                  "Update Bulk description",
-                  "Review",
-                  "Admin Heading",
-                ].map((text, index) => (
-                  <ListItem sx={{ pl: 4 }} button key={text}>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                ))}
-              </List>
-            </Collapse>
-          </div>
-        </List>
-      </List>
-      <Divider sx={{bgcolor: '#adadad'}}/>
-    </Drawer>
-  );
+                <Divider sx={{ bgcolor: "#adadad" }} />
+                <ListItemButton>
+                    <ListItemIcon>
+                        <DashboardIcon sx={{ color: "#fff" }} />
+                    </ListItemIcon>
+                    <ListItemText sx={{ py: 1 }} primary="Dashboard" />
+                </ListItemButton>
+                <Divider sx={{ bgcolor: "#adadad" }} />
+                <div className="fadeword">INTERFACE</div>
+            </List>
+            <Divider sx={{ bgcolor: "#adadad" }} />
+            {dashboardContent.map((items, index) => (
+                <div key={index}>
+                    <CollapsibleCustomComponent
+                        item={items}
+                        title="some text"
+                    />
+                </div>
+            ))}
+        </Drawer>
+    );
 }
+
+const CollapsibleCustomComponent = ({ item, title }) => {
+    const [open, setOpen] = React.useState(false);
+
+    return (
+        <>
+            <ListItemButton onClick={() => setOpen(() => !open)}>
+                <ListItemIcon>
+                    <FolderIcon sx={{ color: "#fff" }} />
+                </ListItemIcon>
+                <ListItemText primary="Mobile Page" />
+                {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <div className="dropdown">
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                    <div className="drop-fade">BASIC SERVICES:</div>
+                    <List component="div" disablePadding>
+                        {item.map((text, index) => (
+                            <Link href={text.link}>
+                                <ListItem sx={{ pl: 4 }} button key={text.name}>
+                                    <ListItemText primary={text.name} />
+                                </ListItem>
+                            </Link>
+                        ))}
+                    </List>
+                </Collapse>
+            </div>
+        </>
+    );
+};
